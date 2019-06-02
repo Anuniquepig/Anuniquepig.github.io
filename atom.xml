@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-13T15:37:04.976Z</updated>
+  <updated>2019-06-02T09:55:50.578Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test01</title>
+    <link href="http://yoursite.com/2019/06/02/test01/"/>
+    <id>http://yoursite.com/2019/06/02/test01/</id>
+    <published>2019-06-02T09:47:17.000Z</published>
+    <updated>2019-06-02T09:55:50.578Z</updated>
+    
+    <content type="html"><![CDATA[<p>—001<br>学的不是思科 也不是华为 —&gt; 学的是 网络技术<br>OSPF BGP VPN 组播 —&gt; 思科 华为 都有</p><p>IDC —&gt; BGP —&gt; DDOS 拒绝服务攻击<br>VPN —&gt; IPSEC ESAY SSL</p><p>BGP 用于数据中心与运营商之间   企业 — 电信  电信 — 联通</p><p>企业VPN —&gt; ipsec VPN ssl VPN | 端到端之间一定要用到<br>easy VPN 连接到总部<br>高清有限电视 —&gt; 高清机顶盒 —&gt; 组播  ip信息化<br>电信 联通 移动 —&gt; 给企业提供专线业务  MPLS（多协议标签交换 Multi-Protocol Lable Switching）</p><p>路由交换 —&gt; 路由器交换机</p><p>路由 交换思路<br>路由器 交换机 三层交换机</p><p>— 路由器  什么是路由器？<br>将不同地址段的数据进行转发<br>    基于IP地址转发<br>    隔绝广播 目标MAC地址全为1  FF</p><p>每一台路由器 = 快递站点  — 查询转发<br>数据包 = 快递<br>目的地：去往哪里？ a - c - d - b<br>每一个快递站点 有一张地图 — 标识所有的目的线路</p><p>逐跳查询  逐跳转发<br>跳 —-&gt; 路由器<br>每一台路由器经过查询 查询路由表 转发 转发到下一跳（下一台交换机）<br>每一台路由器 查询什么？ 查询路由表 = 地图</p><p>路由表 —&gt; CEF表 —&gt; FIB表 —&gt; MPLS(LFIB)</p><p>路由器 有路由表 —&gt;怎么形成的？<br>地图 = 路由表 —&gt;怎么形成的？<br>通过 路由协议 形成的 —&gt;通过不同的路由协议来实现的<br>确保这张 路由表 最快 最优</p><p>—-静态路由和动态路由<br>静态路由：手动一条一条写上去<br>动态路由：自动方式 慢慢自动生成<br>BGP OSPF ISIS — 熟练 扩展  冗余备份 静态路由 + BFD SLA HSRP VRRP</p><p>静态路由<br>ip route &lt;目的ip地址&gt; &lt;目的ip地址掩码&gt; &lt;下一跳地址&gt;<br>ip route 192.168.2.2 255.255.255.255 192.168.1.2<br>ip route 192.168.2.0 255.255.255.0 192.168.1.2</p><p>默认路由 —&gt; 又叫做 缺省路由<br>ip route 0.0.0.0 0.0.0.0 &lt;下一跳地址&gt;</p><p>为什么会负载均衡？ —&gt;管理距离<br>当我去往一个目标地址，可以有两个方向   会比较管理距离<br>管理距离：路由协议出厂默认权重 【越小越好】<br>静态路由 — 1<br>ip route 0.0.0.0 0.0.0.0 10.1.1.2<br>ip route 0.0.0.0 0.0.0.0 20.1.1.2  11<br>        路由表只显示最优条目</p><p>浮动路由</p><p>—交换机  什么是交换机？<br>将相同地址段的数据进行转发<br>    基于MAC地址抓发数据</p><p>路由 — 跨网段数据转发  不同地址段   广域网<br>交换 — 同网段数据转发  相同地址段   局域网</p><p>—002 NAT  网络地址转换<br>安全 私有地址 转换 公有地址(共享上网) 共用一个IP</p><p>安全 不愿意 让内部的电脑  直接暴漏在公网上</p><p>端口号  一个端口号 = 一项服务</p><p>1台路由器 如何 伪装成pc？<br>    1.关闭路由功能 【no ip routing】<br>    2.接口配置ip,掩码，<br>    3.配置网关(网关配置：ip default-gateway 192.168.1.1)</p><p>PBR — Policy Based Routing 策略路由<br>三步  NAT操作步骤：<br>    1.进入外网口 连接ISP接口 开启NAT转换出去的接口<br>        interface f1/0<br>        ip nat outside<br>    2.进入内网口 连接server接口 开启<br>        interface f0/0<br>        ip nat inside<br>    3.配置公网地址和内网地址的关系<br>        ip nat inside source static tcp 192.168.1.2 23 100.1.1.2 4001<br>        telnet 100.1.1.2 4001</p><p>telnet  属于tcp服务，基于可靠的传输方式</p><p>type rotary — 轮询  循环</p><p>TCP – PAT 负载均衡 —&gt; 只能针对TCP的数据 进行负载均衡<br>    ip nat outside<br>    ip nat inside</p><pre><code>access-list 1 premit any  --通过ACL 匹配任何来源ip nat pool NAT 192.168.1.10 192.168.1.12 netmask 255.255.255.0 type rotaryip nat inside destination list 1 pool NAT </code></pre><p>—003<br>ping —&gt; ICMP协议   测试通不通,速度快慢<br>ping 一去一回<br>过去的包 —&gt; echo 包<br>回来的包 —&gt; echo-replay 包</p><p>DDOS — 拒绝服务攻击   （常发生于：数据中心 运营商 金融 医疗 军工 BAT [需要 安全 稳定]）<br>    大量的数据 堵到出口<br>早前DDOS — ping 功能  （现在UDP洪水攻击 — 阿拉丁UDP洪水攻击器）<br>ms:毫秒 数据传输时间<br>TTL： time to live — 生存周期   【断定远程系统】<br>中间经过条数</p><p>系统返回值：利用 ping 基本检查</p><p>ICMP —&gt; ping/tracert<br>访问速度慢<br>tracert x.x.x.x //路径   —- 客户数据访问线路 错误（路有错误）</p><p>—004<br>VLAN  — virtual LAN<br>LAN — 局域网</p><p>单播不通 — 一对一访问 — 使用不同网段的时候<br>广播是通 — 一对多访问 — 局域网病毒  广播进行<br>组播 — 服务于某种需求的 — 机房 多媒体软件<br>ARP协议  </p><p>一台交换机上的不同VLAN 不可以通信</p><p>VLAN 1 = native vlan  – 本地vlan  – 管理vlan<br>所有的接口默认都在vlan 1 下面<br>所有的接口默认是关闭的，需要手动开启  no shutdown</p><p>VLAN功能 — 基于端口的VLAN划分(常用) | 基于MAC地址VLAN划分</p><p>交换机端口模式：<br>    默认情况下 接口 是 auto 自动协商<br>    access   — 交换机接pc<br>    trunk    — 交换机接交换机<br>        分类：<br>            ISL  – 思科私有<br>            802.1Q – 公有<br>        L2TP</p><p>1.创建VLAN<br>    vlan database  —进入vlan数据库<br>    vlan 10 – 创建编号为10的vlan<br>    vlan 20 – 创建编号为20的vlan<br>2.将对应的网路接口划分到具体的VLAN当中<br>    进入具体的交换机端口<br>    更改接口模式<br>        switchport mode access</p><pre><code>将接口划入具体的vlan中    switchport access vlan 10    将接口从vlan20中删除    R2(config)#int f0/11    R2(config-if)#no switchport access vlan 20</code></pre><p>查看vlan信息</p><p>让多台交换机上相同vlan可以互通：<br>    2台交换机之间配置：<br>        trunk在2个交换机之间的作用：<br>            出交换机：打上标签<br>            入交换机：解除标签<br>    switchport trunk encapsulation dot1q  — 将这个接口封装成 802.1q 模式<br>    switchport mode trunk</p><p>三层交换机做路由器需要启路由功能<br>    ip routing</p><p>端口划入vlan时，为什么端口模式，不能自动协商？<br>    vlan跳跃攻击【很难实现】</p><p>—005<br>小凡模拟器 + VMware</p><p>NIC-0 = 有限网卡(无线网卡) = p0/0<br>NIC-1 = 虚拟网卡 = vmnet1 = p0/1</p><p>NM-1FE-TX —<br>FE = FastEthernet 快速以太网接口<br>TX = 收发<br>1个百兆口 可以支持收发功能</p><p>—006 NAT 网络地址转换<br>设计初衷：安全而生</p><p>如何配置一台网关设备？<br>    单线路：必须对运营商指一条默认路由</p><p>当我们开启了NAT之后，路由器上产生了一张表 地址转换表<br>内网 外网彼此之间 转换作用</p><p>公司单线路，上网时断时续？<br>    端口占用<br>解决：设置NAT条目端口占用时间</p><p>—007 命令讲解<br>调试设备<br>    复杂的功能： ssl vpn remote vpn mpls</p><p>波特率 9600<br>是可以更改的<br>    1.变相当作密码使用<br>    2.安装系统<br>        ftp/tftp 安装系统  –前提有系统<br>        没有系统 bootstrap  — 升级系统 Xmodem  通过console线升级系统<br>            修改console 速率  – 提升 系统通过 console 上传速度</p><blockquote><p>：用户模式  — 只能看 不能摸 不是什么都能看</p><p>#：特权模式  — 只能看 不能摸 但是什么都能看<br>configure terminal：进入全局模式<br>config:全局模式  用于做配置<br>config-if: 接口模式</p></blockquote><p>常见工程三招<br>    1.关闭域名解析     开启域名解析（ip domain lookup）<br>        no ip domain lookup<br>        当你输错一个命令，可能去寻找一个域名，找dns服务器</p><pre><code>2.(全局模式下)进入console 关闭会话超时    line console 0        no exec-timeout            exec-timeout 分钟数  --- 开启/设置会话超时        3.开启信息同步        logging synchronous</code></pre><p>FastEthernet 快速以太网接口<br>GigabitEthernet 吉比特 G口 光模块        </p><p>—008 命令集与抓包<br>路由器：<br>    cpu<br>    内存(RAM)<br>    flash(存放系统的 = C盘 - IOS)<br>    主板(bootstrap) - ROM<br>    NVRAM(存放配置的)</p><p>设备调试的几种方式<br>    1.web调试<br>    2.CLI命令行模式（命令集不要背，不要翻译）</p><pre><code>1. 本地调试 --- 通过console线 【反转线缆】2. 远程调试     telnet  不加密    ssh        加密</code></pre><p>安装系统：<br>    低配设备 升级 高配系统<br>        ftp<br>        fttp<br>        xmodem – 通过console线</p><p>设备如何设置密码？<br>        enable password  xxxxxx   — 从用户模式到特权模式<br>        ecable secret  xxxxxx</p><p>开启远程管理<br>    全局模式下：<br>        line vty 0 4  — 允许同一时间 5个用户 登录设备<br>            password xxxxxx<br>            login  — 开启认证登录</p><p>交换机上设置端口镜像：<br>    monitor session 1 source interface f0/0         —<br>    monitor session 1 destination interface f0/10   — </p><p>—009</p><p>​            </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;—001&lt;br&gt;学的不是思科 也不是华为 —&amp;gt; 学的是 网络技术&lt;br&gt;OSPF BGP VPN 组播 —&amp;gt; 思科 华为 都有&lt;/p&gt;
+&lt;p&gt;IDC —&amp;gt; BGP —&amp;gt; DDOS 拒绝服务攻击&lt;br&gt;VPN —&amp;gt; IPSEC ESAY SSL&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="网络" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
